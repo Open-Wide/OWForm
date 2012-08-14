@@ -1,0 +1,55 @@
+-------------------------
+owForm :
+-------------------------
+
+-------------------------
+Extension activation
+-------------------------
+
+1) Put content on extension in "extension/owform" folder
+
+2) Activate extension :
+	Add the following to your settings/override/site.ini.append.php file:
+		[ExtensionSettings]
+		ActiveExtensions[]=owform
+
+3) Regenerate autoloads
+
+4) Clear cache
+
+
+---------------------------------
+Notification workflow activation
+---------------------------------
+1) Create a new Workflow group named "After Publish"
+
+2) In this group, create a new workflow named "Notification", containing "Send notification" event
+
+3) In this group, create a new workflow named "Multiplexer after publish", containing a "Multiplexer" event
+
+4) Configure multiplexer to launch "Notification" event
+
+5) In "Triggers" section, add "Multiplexer after publish" in content/publish/after section.
+
+6) Create your own owform.ini.append.php (see owform.ini for details)
+
+Notifications will be sended when a new object is created.
+You can add the following form in your template to provide a create button :
+
+	<form action={"/content/action"|ezurl} name="CreateNewMyclassname" method="post">							 	
+	    <input type="hidden" value="eng-GB" name="ContentLanguageCode"/>
+	    <input type="hidden" value="{$parentNodeID}" name="ContentNodeID"/>
+	    <input type="hidden" value="{$parentNodeID}" name="NodeID"/>
+	    <input type="hidden" value="my_classe_name" name="ClassIdentifier"/> 
+	    <input type="submit" title ="Create" name="NewButton" value=""/>	    
+	</form>
+
+
+--------------------------------------------------
+Hope you find it useful! 
+
+Simon Boyer
+
+--------------------------------------------------
+The mandatory disclaimer: use at your own risk!
+--------------------------------------------------
